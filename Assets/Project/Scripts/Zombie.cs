@@ -108,6 +108,7 @@ public class Zombie : MonoBehaviour,IDamageable
 
     public void GetDamage(float damage)
     {
+        animator.SetTrigger("Hit");
         Hp -= damage;
     }
 
