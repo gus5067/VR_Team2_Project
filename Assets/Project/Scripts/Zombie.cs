@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Zombie : MonoBehaviour,IDamageable
 {
@@ -31,6 +32,11 @@ public class Zombie : MonoBehaviour,IDamageable
     private float attackRange;
     public float AttackRange { get { return attackRange; } }
 
+    [SerializeField, Range(0f, 5f)]
+    private float speed;
+    public float Speed { get { return speed; } }
+
+
     private Animator animator;
     [SerializeField]
     private GameObject ragDoll;
@@ -38,9 +44,17 @@ public class Zombie : MonoBehaviour,IDamageable
     [SerializeField]
     public CharacterController characterController;
 
+    private NavMeshAgent agent;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+    }
+
+    private void Start()
+    {
+        agent.speed = this.Speed;
     }
     private void Update()
     {

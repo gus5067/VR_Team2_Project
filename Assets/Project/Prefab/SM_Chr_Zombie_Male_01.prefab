@@ -774,8 +774,7 @@ GameObject:
   - component: {fileID: 1266907951}
   - component: {fileID: 1266907947}
   - component: {fileID: 1266907948}
-  - component: {fileID: 537962714}
-  - component: {fileID: 537962715}
+  - component: {fileID: 2003984969}
   m_Layer: 9
   m_Name: SM_Chr_Zombie_Male_01
   m_TagString: Untagged
@@ -863,7 +862,7 @@ CharacterController:
   m_Height: 2
   m_Radius: 0.5
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0.8
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 1, z: 0}
@@ -899,9 +898,10 @@ MonoBehaviour:
   hp: 100
   damage: 0
   attackRange: 0.8
+  speed: 1
   ragDoll: {fileID: 3919932208423944520, guid: 3cb0664d10ff3314ab2e2325ebcea7cc, type: 3}
   characterController: {fileID: 1266907951}
---- !u!195 &537962714
+--- !u!195 &2003984969
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -911,7 +911,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 8
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -923,23 +923,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 1
---- !u!114 &537962715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1187010538823314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70f0dd07bcf7fc64f9bceff0202f0a82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  viewRadius: 20
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &1195061267236796
 GameObject:
   m_ObjectHideFlags: 0

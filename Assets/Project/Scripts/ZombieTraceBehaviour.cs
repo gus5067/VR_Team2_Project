@@ -9,6 +9,7 @@ public class ZombieTraceBehaviour : StateMachineBehaviour
     private NavMeshAgent agent;
     private Zombie zombie;
     private CharacterController controller;
+    private float speed;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,6 +17,7 @@ public class ZombieTraceBehaviour : StateMachineBehaviour
         agent = animator.GetComponent<NavMeshAgent>();
         zombie = animator.GetComponent<Zombie>();
 
+        speed = zombie.Speed;
         controller = zombie.characterController;
     }
 
@@ -28,7 +30,7 @@ public class ZombieTraceBehaviour : StateMachineBehaviour
         }
         else if(agent.enabled == false)
         {
-            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * 4f * Time.deltaTime);
+            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * speed * Time.deltaTime);
         }
     }
 

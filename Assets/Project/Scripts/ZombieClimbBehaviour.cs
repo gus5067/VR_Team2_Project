@@ -8,6 +8,7 @@ public class ZombieClimbBehaviour : StateMachineBehaviour
     private NavMeshAgent agent;
     private Zombie zombie;
     private CharacterController controller;
+    private float speed;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -16,7 +17,7 @@ public class ZombieClimbBehaviour : StateMachineBehaviour
 
         controller = zombie.characterController;
 
-
+        speed = zombie.Speed;
         agent.enabled = false;
         controller.enabled = true;
     }
@@ -24,7 +25,7 @@ public class ZombieClimbBehaviour : StateMachineBehaviour
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.position += Vector3.up * 0.4f * Time.deltaTime;
+        animator.transform.position += Vector3.up * speed * 0.5f * Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
