@@ -3,32 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieTraceBehaviour : StateMachineBehaviour
+public class ZombieClimbBehaviour : StateMachineBehaviour
 {
-    private ViewDetector viewDetector;
     private NavMeshAgent agent;
+    private Zombie zombie;
+    private CharacterController controller;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        viewDetector = animator.GetComponent<ViewDetector>();
         agent = animator.GetComponent<NavMeshAgent>();
+        zombie = animator.GetComponent<Zombie>();
+
+        controller = zombie.characterController;
+
+
+        agent.enabled = false;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        viewDetector.FindTarget();
-        if(viewDetector.target != null)
-        {
-            agent.SetDestination(viewDetector.target.transform.position);
-        }
+        animator.transform.position += Vector3.up * 1f * Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        controller.enabled = true;
+    }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

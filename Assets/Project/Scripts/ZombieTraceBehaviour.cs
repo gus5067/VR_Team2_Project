@@ -1,24 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class ZombieIdleBehaviour : StateMachineBehaviour
+public class ZombieTraceBehaviour : StateMachineBehaviour
 {
     private ViewDetector viewDetector;
+    private NavMeshAgent agent;
+    private Zombie zombie;
+    private CharacterController controller;
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        viewDetector = animator.GetComponent<ViewDetector>(); 
+        viewDetector = animator.GetComponent<ViewDetector>();
+        agent = animator.GetComponent<NavMeshAgent>();
+        zombie = animator.GetComponent<Zombie>();
+
+        controller = zombie.characterController;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
-
-        if(viewDetector.FindTarget())
+        if(viewDetector.FindTarget() && agent.enabled == true)
         {
-            animator.SetBool("isRun", true);
+            agent.SetDestination(viewDetector.target.transform.position);
+        }
+        else if(agent.enabled == false)
+        {
+            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * 2f * Time.deltaTime);
         }
     }
 
