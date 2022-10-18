@@ -18,18 +18,19 @@ public class ZombieClimbBehaviour : StateMachineBehaviour
 
 
         agent.enabled = false;
+        controller.enabled = true;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.position += Vector3.up * 1f * Time.deltaTime;
+        animator.transform.position += Vector3.up * 0.4f * Time.deltaTime;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        controller.enabled = true;
+        
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

@@ -2,10 +2,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Zombie : MonoBehaviour
+public class Zombie : MonoBehaviour,IDamageable
 {
+    [SerializeField]
+    private float hp;
+    public float Hp
+    {
+        get { return hp; }
+        set
+        {
+            if (value <= 0)
+            {
+                Die();
+            }
+            else
+            {
+                hp = value;
+                Debug.Log("남은 체력 : " + hp);
+            }
+
+        }
+    }
+    [SerializeField]
+    private float damage;
+    public float Damage { get { return damage; } }
+
+    [SerializeField, Range(0f, 10f)]
+    private float attackRange;
+    public float AttackRange { get { return attackRange; } }
 
     private Animator animator;
+    [SerializeField]
+    private GameObject ragDoll;
+
     [SerializeField]
     public CharacterController characterController;
 
@@ -16,6 +45,7 @@ public class Zombie : MonoBehaviour
     private void Update()
     {
         FindWall();
+        InAttackRange();
     }
 
     private void FindWall()
@@ -45,5 +75,37 @@ public class Zombie : MonoBehaviour
             animator.SetBool("isClimb", false);
             return;
         }
+    }
+
+    private void InAttackRange()
+    {
+        Collider[] targets = Physics.OverlapSphere(transform.position, attackRange, 1 << 6);
+        if(targets.Length > 0)
+        {
+            Debug.Log("공격범위");
+            animator.SetBool("isRun", false);
+            animator.SetTrigger("Attack");
+        }
+        else
+        {
+            return;
+        }
+    }
+
+    public void GetDamage(float damage)
+    {
+        Hp -= damage;
+    }
+
+    private void Die()
+    {
+        Instantiate(ragDoll, transform.position, transform.rotation);
+        gameObject.SetActive(false); //나중에 오브젝트 풀링
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, attackRange);
     }
 }

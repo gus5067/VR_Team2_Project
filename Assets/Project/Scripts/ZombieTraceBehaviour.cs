@@ -28,7 +28,7 @@ public class ZombieTraceBehaviour : StateMachineBehaviour
         }
         else if(agent.enabled == false)
         {
-            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * 2f * Time.deltaTime);
+            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * 4f * Time.deltaTime);
         }
     }
 
