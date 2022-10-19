@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class ZombieTrigger : MonoBehaviour
 {
+
     [SerializeField]
     private Transform[] spawnPos;
 
@@ -12,6 +13,9 @@ public class ZombieTrigger : MonoBehaviour
 
     [SerializeField ,Range(0f, 10f)]
     private float spawnTime;
+
+    [SerializeField, Range(1f, 10f)]
+    private float spawnRange;
 
 
     private void OnTriggerEnter(Collider other)
@@ -29,7 +33,7 @@ public class ZombieTrigger : MonoBehaviour
     {
         foreach (Transform t in spawnPos)
         {
-            ObjectPooling.poolDic["Zombie"].GetPool(t.position + new Vector3(Random.Range(0f,3f), 0, Random.Range(0f, 3f)), Quaternion.Euler(0, Random.Range(0f, 120f), 0));
+            ObjectPooling.poolDic["Zombie"].GetPool(t.position + new Vector3(Random.Range(0f, spawnRange), 0, Random.Range(0f, spawnRange)), Quaternion.Euler(0, Random.Range(0f, 120f), 0));
         }
     }
 
