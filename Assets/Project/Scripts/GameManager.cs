@@ -19,16 +19,24 @@ public class GameManager : MonoBehaviour
             {
                 foreach(Collider zombie in zombies)
                 {
-                    zombie.GetComponent<Zombie>()?.GetDamage(20);
+                    zombie.GetComponent<Zombie>()?.GetDamage(5);
                 }
             }
-            //foreach (Zombie zombie in zombies)
-            //{
-            //    if (zombie is IDamageable)
-            //    {
-            //        zombie.GetDamage(20);
-            //    }
-            //}
+        }
+
+        Collider[] explodes = Physics.OverlapSphere(player.transform.position + Vector3.up, 15f, 1 << 12);
+        if (Input.GetMouseButtonDown(1))
+        {
+            Debug.Log("Æø¹ß¹°¿¡ µ¥¹ÌÁö ÁÜ");
+
+
+            if (explodes.Length > 0)
+            {
+                foreach (Collider explode in explodes)
+                {
+                    explode.GetComponent<IDamageable>()?.GetDamage(20);
+                }
+            }
         }
     }
 

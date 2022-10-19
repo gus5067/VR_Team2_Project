@@ -2,17 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ragdoll : MonoBehaviour
+public class Explosion : MonoBehaviour
 {
     private void OnEnable()
     {
-        StartCoroutine(RagdollRoutine());
+        Invoke("TurnOffVfx", 0.8f);
     }
 
-    IEnumerator RagdollRoutine()
+    private void TurnOffVfx()
     {
-        yield return new WaitForSeconds(3f);
         gameObject.SetActive(false);
-
     }
+
 }

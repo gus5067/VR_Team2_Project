@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -114,8 +115,8 @@ public class Zombie : MonoBehaviour,IDamageable
 
     private void Die()
     {
-        Instantiate(ragDoll, transform.position, transform.rotation);
-        gameObject.SetActive(false); //나중에 오브젝트 풀링
+        ObjectPooling.poolDic["Zombie_Ragdoll"].GetPool(transform.position, transform.rotation);
+        ObjectPooling.poolDic["Zombie"].ReturnPool(this.gameObject);
     }
 
     private void OnDrawGizmosSelected()
