@@ -72,7 +72,7 @@ public class Zombie : MonoBehaviour,IDamageable
 
         if(Physics.Raycast(ray, out hit, 0.7f, 1 << 8))
         {
-            Debug.Log("충돌함");
+            Debug.Log("벽 충돌함");
             animator.SetBool("isRun", false);
             this.transform.SetParent(hit.transform.parent);
             animator.SetBool("isClimb", true);
