@@ -30,7 +30,16 @@ public class ZombieTraceBehaviour : StateMachineBehaviour
         }
         else if(agent.enabled == false)
         {
-            controller.Move((viewDetector.target.transform.position - animator.transform.position).normalized * speed * Time.deltaTime);
+            Vector3 moveDir = (viewDetector.target.transform.position - animator.transform.position).normalized *speed;
+            if(controller.isGrounded == false)
+            {
+                controller.Move(new Vector3(moveDir.x, Physics.gravity.y, moveDir.z) * Time.deltaTime);
+            }
+            else
+            {
+                controller.Move(moveDir * Time.deltaTime);
+            }
+            
         }
     }
 
