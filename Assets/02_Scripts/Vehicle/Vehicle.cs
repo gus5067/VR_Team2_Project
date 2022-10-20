@@ -30,14 +30,14 @@ public class Vehicle : MonoBehaviour
         {
             GetNextWayPoint();
         }
-        if(Input.GetKeyDown(KeyCode.Q))
-        {
-            Instantiate(plane, planeSpawnPoint.transform.position, transform.rotation);
-        }
-        if(Input.GetKeyDown(KeyCode.W))
-        {
-            StartCoroutine(Skill_Fire());
-        }
+        //if(Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    Instantiate(plane, planeSpawnPoint.transform.position, transform.rotation);
+        //}
+        //if(Input.GetKeyDown(KeyCode.W))
+        //{
+        //    StartCoroutine(Skill_Fire());
+        //}
 
 
     }

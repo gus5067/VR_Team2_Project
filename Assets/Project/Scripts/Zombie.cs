@@ -72,7 +72,6 @@ public class Zombie : MonoBehaviour,IDamageable
 
         if(Physics.Raycast(ray, out hit, 0.7f, 1 << 8))
         {
-            Debug.Log("벽 충돌함");
             animator.SetBool("isRun", false);
             this.transform.SetParent(hit.transform.parent);
             animator.SetBool("isClimb", true);
@@ -97,7 +96,6 @@ public class Zombie : MonoBehaviour,IDamageable
         Collider[] targets = Physics.OverlapSphere(transform.position, attackRange, 1 << 6);
         if(targets.Length > 0)
         {
-            Debug.Log("공격범위");
             animator.SetBool("isRun", false);
             animator.SetTrigger("Attack");
         }
