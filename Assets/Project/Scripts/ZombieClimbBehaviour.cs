@@ -20,18 +20,23 @@ public class ZombieClimbBehaviour : StateMachineBehaviour
         speed = zombie.Speed;
         agent.enabled = false;
         controller.enabled = true;
+        GameManager.instance.busController.Speed -= zombie.SlowSpeed;
+
+        animator.transform.localPosition = animator.transform.localPosition + Vector3.up * Random.Range(0.2f, 0.7f);
+
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        animator.transform.position += Vector3.up * speed * 0.5f * Time.deltaTime;
+        zombie.isHanging = true;
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        
+        GameManager.instance.busController.Speed += zombie.SlowSpeed;
+        zombie.isHanging = false;
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()

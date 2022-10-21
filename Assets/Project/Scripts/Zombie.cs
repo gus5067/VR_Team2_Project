@@ -20,7 +20,6 @@ public class Zombie : MonoBehaviour,IDamageable
             else
             {
                 hp = value;
-                Debug.Log("남은 체력 : " + hp);
             }
 
         }
@@ -37,6 +36,15 @@ public class Zombie : MonoBehaviour,IDamageable
     private float speed;
     public float Speed { get { return speed; } }
 
+    [SerializeField, Range(0f, 2f)]
+    private float slowSpeed;
+    public float SlowSpeed { get { return slowSpeed; } }
+
+    [SerializeField, Range(0f, 5f)]
+    private float attackTime;
+    public float AttackTime { get { return attackTime; } }
+
+    private bool isCoolTime;
 
     private Animator animator;
     [SerializeField]
@@ -46,6 +54,9 @@ public class Zombie : MonoBehaviour,IDamageable
     public CharacterController characterController;
 
     private NavMeshAgent agent;
+
+    public bool isHanging;
+
 
     private void Awake()
     {
@@ -60,7 +71,7 @@ public class Zombie : MonoBehaviour,IDamageable
     private void Update()
     {
         FindWall();
-        InAttackRange();
+        Attack();
     }
 
     private void FindWall()
@@ -91,19 +102,39 @@ public class Zombie : MonoBehaviour,IDamageable
         }
     }
 
-    private void InAttackRange()
+    private void Attack()
     {
-        Collider[] targets = Physics.OverlapSphere(transform.position, attackRange, 1 << 6);
-        if(targets.Length > 0)
+        if (isHanging && !isCoolTime)
         {
-            animator.SetBool("isRun", false);
-            animator.SetTrigger("Attack");
+            StartCoroutine("AttackRoutine", AttackTime);
         }
         else
         {
             return;
         }
     }
+
+    private IEnumerator AttackRoutine(float time)
+    {
+        isCoolTime = true;
+        animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(time);
+        isCoolTime = false;
+
+    }
+    //private void InAttackRange()
+    //{
+    //    Collider[] targets = Physics.OverlapSphere(transform.position, attackRange, 1 << 6);
+    //    if(targets.Length > 0)
+    //    {
+    //        animator.SetBool("isRun", false);
+    //        animator.SetTrigger("Attack");
+    //    }
+    //    else
+    //    {
+    //        return;
+    //    }
+    //}
 
     public void GetDamage(float damage)
     {

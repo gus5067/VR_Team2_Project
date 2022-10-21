@@ -4,47 +4,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject player;
+    public static GameManager instance; //æ∆¡˜ ΩÃ±€≈Ê¿∏∑Œ ∏∏µÈ¡ˆ æ ¿Ω »ƒø° « ø‰º∫ ¥¿≥¢∏È ΩÃ±€≈Ê¿∏∑Œ ∫Ø∞Ê
 
-    private void Update()
+    private void Awake()
     {
-        Collider[] zombies = Physics.OverlapSphere(player.transform.position + Vector3.up, 15f, 1 << 9);
-        if (Input.GetMouseButtonDown(0))
-        {
-            Debug.Log("µ•πÃ¡ˆ ¡‹");
-            
-
-            if(zombies.Length > 0)
-            {
-                foreach(Collider zombie in zombies)
-                {
-                    zombie.GetComponent<Zombie>()?.GetDamage(5);
-                }
-            }
-        }
-
-        Collider[] explodes = Physics.OverlapSphere(player.transform.position + Vector3.up, 15f, 1 << 12);
-        if (Input.GetMouseButtonDown(1))
-        {
-            Debug.Log("∆¯πﬂπ∞ø° µ•πÃ¡ˆ ¡‹");
-
-
-            if (explodes.Length > 0)
-            {
-                foreach (Collider explode in explodes)
-                {
-                    explode.GetComponent<IDamageable>()?.GetDamage(20);
-                }
-            }
-        }
+        instance = this;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.green;
+    public BusSpeedController busController;
 
-        Gizmos.DrawWireSphere(player.transform.position + Vector3.up, 15f);
-    }
+    public BusHp busHp;
+
 
 }

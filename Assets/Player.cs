@@ -6,9 +6,6 @@ public class Player : MonoBehaviour
 {
     private CharacterController controller;
 
-    [SerializeField]
-    private Vector3 posBox;
-
     private Vector3 moveDir;
 
     private Vector3 localPos;
@@ -24,13 +21,13 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        PlayerPosLimit();
-        if(isRiding)
-        {
-            PlayerMove();
-        }
 
-
+        transform.localPosition = new Vector3(0, 4.4f, 0);
+        //PlayerPosLimit();
+        //if(isRiding)
+        //{
+        //    PlayerMove();
+        //}
     }
     
     private void PlayerMove()
@@ -43,23 +40,23 @@ public class Player : MonoBehaviour
 
 
         // 캐릭터 움직임.
-        controller.Move(moveDir * 5 * Time.deltaTime);
+        controller.Move(((moveDir * 5) + Vector3.up * Physics.gravity.y) * Time.deltaTime);
     }
 
     private void PlayerPosLimit()
     {
-        localPos = new Vector3(Mathf.Clamp(transform.localPosition.x, -1f, 1f),transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, -3f, 2.5f));
+        localPos = new Vector3(Mathf.Clamp(transform.localPosition.x, -1f, 1f), transform.localPosition.y, Mathf.Clamp(transform.localPosition.z, -3f, 2.5f));
 
         transform.localPosition = localPos;
 
         Debug.Log(transform.localPosition.x + " && " + transform.localPosition.z);
 
-        if(transform.localPosition.x >= 1f || transform.localPosition.x <= -1f)
+        if (transform.localPosition.x >= 1f || transform.localPosition.x <= -1f)
         {
             isRiding = false;
             transform.localPosition = prevPos;
         }
-        else if(transform.localPosition.z >= 2.5f || transform.localPosition.z <= -3f)
+        else if (transform.localPosition.z >= 2.5f || transform.localPosition.z <= -3f)
         {
             isRiding = false;
             transform.localPosition = prevPos;
@@ -69,6 +66,7 @@ public class Player : MonoBehaviour
             isRiding = true;
             prevPos = transform.localPosition;
         }
+
      
 
     }
