@@ -28,6 +28,10 @@ public class Player : MonoBehaviour
         {
             laser.gameObject.SetActive(true);
         }
+        else if(Input.GetMouseButtonUp(1))
+        {
+            laser.gameObject.SetActive(false);
+        }
         Teleport();
         //transform.localPosition = new Vector3(0, 4.4f, 0);
         //PlayerPosLimit();
