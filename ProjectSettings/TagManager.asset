@@ -8,6 +8,8 @@ TagManager:
   - LeftWall
   - Bus
   - Fire
+  - RoomLight
+  - Interact
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Roof
   - Ragdoll
   - Object
-  - 
+  - Teleport
   - 
   - 
   - 
