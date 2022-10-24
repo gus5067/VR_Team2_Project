@@ -53,6 +53,7 @@ public class Zombie : MonoBehaviour,IDamageable
     [SerializeField]
     public CharacterController characterController;
 
+    public AudioSource zombieAudio;
     private NavMeshAgent agent;
 
     public bool isHanging;
