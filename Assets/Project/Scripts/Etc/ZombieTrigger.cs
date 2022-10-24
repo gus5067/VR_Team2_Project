@@ -33,6 +33,10 @@ public class ZombieTrigger : MonoBehaviour
         foreach (Transform t in spawnPos)
         {
             ObjectPooling.poolDic["Zombie"].GetPool(t.position + new Vector3(Random.Range(0f, spawnRange), 0, Random.Range(0f, spawnRange)), Quaternion.Euler(0, Random.Range(0f, 120f), 0));
+            if (Random.Range(0, 11) > 6)
+            {
+                ObjectPooling.poolDic["ZombieRun"].GetPool(t.position + new Vector3(Random.Range(0f, spawnRange), 0, Random.Range(0f, spawnRange)), Quaternion.Euler(0, Random.Range(0f, 120f), 0));
+            }
         }
     }
 

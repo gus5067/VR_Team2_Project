@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+[RequireComponent(typeof(AudioSource))]
 public class BusSpeedController : MonoBehaviour
 {
     private NavMeshAgent bus;

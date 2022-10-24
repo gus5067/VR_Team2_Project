@@ -4,10 +4,11 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
 public class Zombie : MonoBehaviour,IDamageable
 {
     [SerializeField]
-    private float hp;
+    protected float hp;
     public float Hp
     {
         get { return hp; }
@@ -25,31 +26,31 @@ public class Zombie : MonoBehaviour,IDamageable
         }
     }
     [SerializeField]
-    private float damage;
+    protected float damage;
     public float Damage { get { return damage; } }
 
     [SerializeField, Range(0f, 10f)]
-    private float attackRange;
+    protected float attackRange;
     public float AttackRange { get { return attackRange; } }
 
     [SerializeField, Range(0f, 5f)]
-    private float speed;
+    protected float speed;
     public float Speed { get { return speed; } }
 
     [SerializeField, Range(0f, 2f)]
-    private float slowSpeed;
+    protected float slowSpeed;
     public float SlowSpeed { get { return slowSpeed; } }
 
     [SerializeField, Range(0f, 5f)]
-    private float attackTime;
+    protected float attackTime;
     public float AttackTime { get { return attackTime; } }
 
-    private bool isCoolTime;
+    protected bool isCoolTime;
 
-    private Animator animator;
+    protected Animator animator;
 
     [SerializeField]
-    private GameObject ragDoll;
+    protected GameObject ragDoll;
 
     [HideInInspector]
     public CharacterController characterController;
@@ -59,7 +60,7 @@ public class Zombie : MonoBehaviour,IDamageable
 
     public AudioData audioData;
 
-    private NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
     public bool isHanging;
 
@@ -149,7 +150,7 @@ public class Zombie : MonoBehaviour,IDamageable
         Hp -= damage;
     }
 
-    private void Die()
+    protected virtual void Die()
     {
         ObjectPooling.poolDic["Zombie_Ragdoll"].GetPool(transform.position, transform.rotation);
         ObjectPooling.poolDic["Zombie"].ReturnPool(this.gameObject);
