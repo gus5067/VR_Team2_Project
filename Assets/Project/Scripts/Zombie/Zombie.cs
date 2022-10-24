@@ -47,22 +47,27 @@ public class Zombie : MonoBehaviour,IDamageable
     private bool isCoolTime;
 
     private Animator animator;
+
     [SerializeField]
     private GameObject ragDoll;
 
-    [SerializeField]
+    [HideInInspector]
     public CharacterController characterController;
 
+    [HideInInspector]
     public AudioSource zombieAudio;
+
+    public AudioData audioData;
+
     private NavMeshAgent agent;
 
     public bool isHanging;
-
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        zombieAudio = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -121,7 +126,6 @@ public class Zombie : MonoBehaviour,IDamageable
         animator.SetTrigger("Attack");
         yield return new WaitForSeconds(time);
         isCoolTime = false;
-
     }
     //private void InAttackRange()
     //{
@@ -140,6 +144,8 @@ public class Zombie : MonoBehaviour,IDamageable
     public void GetDamage(float damage)
     {
         animator.SetTrigger("Hit");
+        zombieAudio.clip = audioData.AudioClips[2];
+        zombieAudio.Play();
         Hp -= damage;
     }
 

@@ -9,6 +9,8 @@ public class ZombieAttackBehaviour : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         zombie = animator.GetComponent<Zombie>();
+        zombie.zombieAudio.clip = zombie.audioData.AudioClips[1];
+        zombie.zombieAudio.Play();
         GameManager.instance.busHp.GetDamage(zombie.Damage);
     }
 

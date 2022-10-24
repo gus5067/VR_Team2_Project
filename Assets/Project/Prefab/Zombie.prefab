@@ -871,6 +871,8 @@ MonoBehaviour:
   attackTime: 3
   ragDoll: {fileID: 3919932208423944520, guid: 3cb0664d10ff3314ab2e2325ebcea7cc, type: 3}
   characterController: {fileID: 1266907951}
+  zombieAudio: {fileID: 0}
+  audioData: {fileID: 11400000, guid: 57778d6706784fc4094c243081cb339f, type: 2}
   isHanging: 0
 --- !u!114 &1266907947
 MonoBehaviour:
@@ -971,16 +973,16 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.609
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 130
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 0.25
+  MaxDistance: 10
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -1015,7 +1017,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -1044,7 +1046,7 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: 0.0126571655
       value: 1
       inSlope: 0
       outSlope: 0
