@@ -82,7 +82,7 @@ public class Player : MonoBehaviour
     //    }
 
      
-
+     
     //}
 
     //텔레포트

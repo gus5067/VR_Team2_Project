@@ -29,6 +29,11 @@ public class ObjectPool
     }
     public void GetPool(Vector3 pos, Quaternion rot)
     {
+
+        if(pool.Count == 0)
+        {
+            AddPool(10);
+        }
         GameObject temp = pool.Dequeue();
 
         temp.transform.parent = null;

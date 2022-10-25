@@ -69,11 +69,22 @@ public class Zombie : MonoBehaviour,IDamageable
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         zombieAudio = GetComponent<AudioSource>();
+        characterController = GetComponent<CharacterController>();
     }
 
     private void Start()
     {
         agent.speed = this.Speed;
+        if(characterController.isGrounded != true)
+        {
+            characterController.enabled = true;
+            agent.enabled = false;
+        }
+        else
+        {
+            agent.enabled = true;
+            characterController.enabled = false;
+        }
     }
     private void Update()
     {
