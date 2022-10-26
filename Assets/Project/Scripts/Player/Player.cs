@@ -32,7 +32,8 @@ public class Player : MonoBehaviour
         {
             laser.gameObject.SetActive(false);
         }
-        Teleport();
+        //Teleport();
+        TeleportTest();
         //transform.localPosition = new Vector3(0, 4.4f, 0);
         //PlayerPosLimit();
         //if(isRiding)
@@ -95,6 +96,18 @@ public class Player : MonoBehaviour
             {
                 transform.localPosition = space.posOffset;
                 transform.localRotation = Quaternion.Euler(space.rotOffset);
+            }
+        }
+    }
+
+    private void TeleportTest()
+    {
+        if (Input.GetMouseButton(0) && laser.gameObject.activeSelf)
+        {
+            TeleportSpace space = laser.laserTarget.transform.GetComponent<TeleportSpace>();
+            if (space != null)
+            {
+                space.Test();
             }
         }
     }

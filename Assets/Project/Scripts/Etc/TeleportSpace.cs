@@ -10,8 +10,13 @@ public class TeleportSpace : MonoBehaviour
     [SerializeField]
     public Vector3 rotOffset;
 
+    public bool isTest;
 
-
+    public void Test()
+    {
+        Debug.Log(gameObject.name);
+        isTest = !isTest;
+    }
 
 
 }
