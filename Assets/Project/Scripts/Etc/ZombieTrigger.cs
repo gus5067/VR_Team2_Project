@@ -25,8 +25,8 @@ public class ZombieTrigger : MonoBehaviour
     {
         if(other.tag == "Bus" )
         {
-            InvokeRepeating("ZombieSpawn", 0.2f, spawnTime);
-            Invoke("StopSpawn", spawnNum * spawnTime + 0.3f);
+            Invoke("StopSpawn", spawnNum * spawnTime);
+            InvokeRepeating("ZombieSpawn", 0, spawnTime);
             gameObject.SetActive(false);
         }
     }
